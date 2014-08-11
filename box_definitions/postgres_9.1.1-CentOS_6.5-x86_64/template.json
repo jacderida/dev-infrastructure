@@ -1,0 +1,43 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "ami_name": "postgres_9.1.1-CentOS_6.5-x86_64",
+      "instance_type": "t1.micro",
+      "region": "eu-west-1",
+      "ssh_username": "root",
+      "source_ami": "ami-42718735"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [ "sleep 30" ]
+    },
+    {
+      "type": "shell",
+      "inline": [ "mkdir /tmp/sh" ]
+    },
+    {
+      "type": "file",
+      "source": "../../sh",
+      "destination": "/tmp"
+    },
+    {
+      "scripts": [
+        "../../sh/setup_epel_repository-RHEL.sh",
+        "../../sh/install_puppet-RHEL.sh"
+      ],
+      "type": "shell"
+    },
+    {
+      "type": "shell",
+      "inline": [ "yum update -y" ]
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "postgres.pp",
+      "module_paths": [ "../../pp/modules" ]
+    },
+  ]
+}
