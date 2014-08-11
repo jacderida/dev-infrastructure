@@ -1,0 +1,101 @@
+---
+profile::java_jdk::homedir: /usr/lib/jvm/java-openjdk
+
+profile::database::jira_dbname: jira
+profile::database::jira_dbuser: jiradbuser
+profile::database::jira_db_encoding: UNICODE
+profile::database::port: 5432
+
+profile::jira_server::installdir: /opt/jira
+profile::jira_server::version: 6.2.7
+profile::jira_server::user: jira
+profile::jira_server::group: jira
+profile::jira_server::dbtype: postgresql
+profile::jira_server::port: 8082
+
+profile::stash_server::installdir: /opt/stash
+profile::stash_server::version: 3.1.0
+profile::stash_server::user: stash
+profile::stash_server::group: stash
+profile::stash_server::port: 7990
+profile::stash_server::dbtype: postgresql
+
+profile::jenkins_master::install_java: false # Jenkins does require Java. This is to stop the Jenkins module running its own Java installation.
+profile::jenkins_master::use_lts: true
+profile::jenkins_master::port: 8080
+profile::jenkins_master::plugins:
+    ssh-credentials:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    scm-api:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    git-client:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    credentials:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    maven-plugin:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    token-macro:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    git:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    git-parameter:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    gradle:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    artifactory:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    jboss:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    jira:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    mapdb-api:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    matrix-project:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    sonar:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
