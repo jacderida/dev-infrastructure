@@ -1,0 +1,47 @@
+FORGE
+  remote: https://forgeapi.puppetlabs.com
+  specs:
+    darin-zypprepo (1.0.1)
+    mkrakowitzer-deploy (0.0.2)
+    puppetlabs-apt (1.5.2)
+      puppetlabs-stdlib (>= 2.2.1)
+    puppetlabs-concat (1.1.0)
+      puppetlabs-stdlib (>= 4.0.0)
+    puppetlabs-firewall (1.1.3)
+    puppetlabs-java (1.1.1)
+      puppetlabs-stdlib (>= 0.1.6)
+    puppetlabs-postgresql (3.4.2)
+      puppetlabs-apt (< 2.0.0, >= 1.1.0)
+      puppetlabs-concat (< 2.0.0, >= 1.0.0)
+      puppetlabs-firewall (>= 0.0.4)
+      puppetlabs-stdlib (< 5.0.0, >= 3.2.0)
+    puppetlabs-stdlib (4.3.2)
+    torrancew-cron (0.1.0)
+
+GIT
+  remote: git://github.com/brycejohnson/puppet-jira.git
+  ref: master
+  sha: 061459e7e2a5fd2d4e19e9ee16f7c824dcd9b752
+  specs:
+    mkrakowitzer-jira (0.0.4)
+      mkrakowitzer-deploy (>= 0.0.2)
+
+GIT
+  remote: git://github.com/jacderida/puppet-jenkins.git
+  ref: master
+  sha: b2f1d0dafa933c9c6d39ee2736916a01c511cd12
+  specs:
+    rtyler-jenkins (1.1.0)
+      darin-zypprepo (>= 1.0.1)
+      puppetlabs-apt (>= 0.0.3)
+      puppetlabs-java (>= 1.0.1)
+      puppetlabs-stdlib (>= 2.0.0)
+
+DEPENDENCIES
+  mkrakowitzer-jira (>= 0)
+  puppetlabs-firewall (>= 0)
+  puppetlabs-postgresql (>= 0)
+  puppetlabs-stdlib (>= 0)
+  rtyler-jenkins (>= 0)
+  torrancew-cron (>= 0)
+

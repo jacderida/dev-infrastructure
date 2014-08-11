@@ -1,0 +1,28 @@
+{
+  "summary": "Puppet module to deploy tar files",
+  "project_page": "https://github.com/mkrakowitzer/puppet-deploy",
+  "name": "mkrakowitzer-deploy",
+  "description": "Puppet module to deploy tar files",
+  "checksums": {
+    "manifests/file.pp": "936dd4fd817f02f1dcc9d79617967ab7",
+    "README.markdown": "380814962ce535b0b66205634335521b",
+    "manifests/untar.pp": "eb82a8a422f6a1da845c20bee78d4d09",
+    "README": "bbe6855e238ecb28885cafff497b4c5f",
+    "tests/init.pp": "50cddb8fafe515df10014b3d5cb05997",
+    "Gemfile": "49295ea7bcfa666794253757f0570fd4",
+    "Modulefile": "4fbb1773a6518917e19e01b003eb2295",
+    "manifests/init.pp": "f557e463444a1158bf3e488b17da3fb0",
+    "manifests/unzip.pp": "84de6e943dfab0b90a7bcbe2ade1c060",
+    "Rakefile": "a8a477e42cf1e4f97be253af4d624c44"
+  },
+  "version": "0.0.2",
+  "dependencies": [
+
+  ],
+  "license": "Apache License, Version 2.0",
+  "source": "https://github.com/mkrakowitzer/puppet-deploy.git",
+  "author": "mkrakowitzer",
+  "types": [
+
+  ]
+}

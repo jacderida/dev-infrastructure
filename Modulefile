@@ -1,0 +1,10 @@
+name          'jacderida-dev_infrastructure'
+version       '0.1.0'
+source        ''
+author        'Chris O'Neil'
+license       'Apache 2.0'
+summary       'Puppet repository to stand up my development infrastructure'
+description   'Puppet repository to stand up my development infrastructure'
+project_page  'https://github.com/jacderida/dev-infrastructure'
+
+dependency 'puppetlabs/stdlib'
