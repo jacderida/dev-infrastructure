@@ -35,9 +35,20 @@
       "inline": [ "yum update -y" ]
     },
     {
-      "type": "puppet-masterless",
-      "manifest_file": "postgres.pp",
-      "module_paths": [ "../../pp/modules" ]
+      "type": "shell",
+      "inline": [ "mkdir -p /etc/puppet/hieradata" ]
     },
+    {
+      "type": "file",
+      "source": "../../hiera/",
+      "destination": "/etc/puppet/hieradata"
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "../../manifests/postgres.pp",
+      "module_paths": [ "../../modules" ],
+      "hiera_config_path": "../../hiera.yaml",
+      "facter": { "environment" : "development" }
+    }
   ]
 }

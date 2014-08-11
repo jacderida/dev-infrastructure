@@ -6,7 +6,6 @@ class profile::database {
   $jira_dbuser_password = hiera('profile::database::jira_dbuser_password')
   $jira_db_encoding = hiera('profile::database::jira_db_encoding')
 
-  anchor { 'postgres::start': } ->
   firewall { "120 allow access on ${port}":
     port   => $port,
     proto  => tcp,
@@ -14,14 +13,15 @@ class profile::database {
   } ->
 
   postgresql::server::pg_hba_rule{'allow network access':
-      description => 'allow postgres user to be accessed by cron locally',
-      type        => 'local',
-      user        => 'postgres',
-      database    => 'all',
-      auth_method => 'trust',
-      order       => '001',
+    description => 'allow postgres user to be accessed by cron locally',
+    type        => 'local',
+    user        => 'postgres',
+    database    => 'all',
+    auth_method => 'trust',
+    order       => '001',
   }
 
+  anchor { 'postgres::start': } ->
   class { 'postgresql::server':
     ip_mask_allow_all_users => '0.0.0.0/0',
     listen_addresses        => '*',
