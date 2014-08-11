@@ -1,4 +1,3 @@
-dev-infrastructure
-==================
+# Development Infrastructure
 
-A Puppet-based repository for standing up my development infrastructure.
+Puppet based repository for standing up my development infrastructure.
