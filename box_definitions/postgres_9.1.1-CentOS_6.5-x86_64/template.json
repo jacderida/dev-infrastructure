@@ -32,6 +32,19 @@
     },
     {
       "type": "shell",
+      "inline": [ "mkdir /etc/puppet/files" ]
+    },
+    {
+      "type": "file",
+      "source": "../../files/",
+      "destination": "/etc/puppet/files"
+    },
+    {
+      "type": "shell",
+      "inline": [ "cp /etc/puppet/files/fileserver.conf /etc/puppet/" ]
+    },
+    {
+      "type": "shell",
       "inline": [ "yum update -y" ]
     },
     {
