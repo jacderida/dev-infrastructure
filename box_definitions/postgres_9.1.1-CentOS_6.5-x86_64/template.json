@@ -16,6 +16,10 @@
     },
     {
       "type": "shell",
+      "inline": [ "sed -i 's/^.*requiretty/#Defaults requiretty/' /etc/sudoers" ]
+    },
+    {
+      "type": "shell",
       "inline": [ "mkdir /tmp/sh" ]
     },
     {
