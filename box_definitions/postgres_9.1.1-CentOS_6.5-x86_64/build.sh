@@ -14,6 +14,11 @@ function get_image_id_for_name()
     jq --raw-output --arg image_name $full_image_name '.Images | map(select(.Name == $image_name)) | .[]["ImageId"]'
 }
 
+function get_group_id_from_image_name()
+{
+    aws ec2 describe-security-groups | jq --raw-output --arg image_name $full_image_name '.SecurityGroups | map(select(.GroupName == $image_name)) | .[]["GroupId"]'
+}
+
 function remove_existing_image()
 {
     image_id=$(get_self_owned_aws_images | get_image_id_for_name)
@@ -25,10 +30,14 @@ function remove_existing_image()
 
 function create_security_group()
 {
-    group_id=$(aws ec2 describe-security-groups | jq --raw-output --arg image_name $full_image_name '.SecurityGroups | map(select(.GroupName == $image_name)) | .[]["GroupId"]')
+    group_id=$(get_group_id_from_image_name)
     if [[ -z "$group_id" ]]; then
         echo "Adding security group $full_image_name"
         aws ec2 create-security-group --group-name $full_image_name --description "Postgres machine for development infrastructure"
+        sleep 5
+        echo "Authorizing port 22 on $full_image_name"
+        group_id=$(get_group_id_from_image_name)
+        aws ec2 authorize-security-group-ingress --group-id $group_id --protocol tcp --port 22 --cidr 0.0.0.0/0
     fi
 }
 

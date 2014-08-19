@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "postgres_9.1.1-CentOS_6.5-x86_64",
+      "ami_name": "dev_infra-postgres_9.1.1-CentOS_6.5-x86_64",
       "instance_type": "t1.micro",
       "region": "eu-west-1",
       "ssh_username": "root",
