@@ -2,7 +2,7 @@
 profile::java_jdk::homedir: /usr/lib/jvm/java-openjdk
 
 profile::database::jira_dbname: jira
-profile::database::jira_dbuser: jiradbuser
+profile::database::jira_dbuser: jira
 profile::database::jira_db_encoding: UNICODE
 profile::database::port: 5432
 
