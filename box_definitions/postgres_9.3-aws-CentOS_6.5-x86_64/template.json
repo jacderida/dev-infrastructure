@@ -19,19 +19,6 @@
       "inline": [ "sleep 30" ]
     },
     {
-      "type": "shell",
-      "inline": [ "sed -i 's/^.*requiretty/#Defaults requiretty/' /etc/sudoers" ]
-    },
-    {
-      "type": "shell",
-      "inline": [ "mkdir /tmp/sh" ]
-    },
-    {
-      "type": "file",
-      "source": "../../sh",
-      "destination": "/tmp"
-    },
-    {
       "scripts": [
         "../../sh/setup_epel_repository-RHEL.sh",
         "../../sh/install_puppet-RHEL.sh"
