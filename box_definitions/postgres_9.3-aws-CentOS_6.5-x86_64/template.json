@@ -1,4 +1,8 @@
 {
+  "variables": {
+    "aws_access_key_id": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_access_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
+  },
   "builders": [
     {
       "type": "amazon-ebs",
@@ -65,7 +69,11 @@
       "manifest_file": "../../manifests/postgres.pp",
       "module_paths": [ "../../modules" ],
       "hiera_config_path": "../../hiera.yaml",
-      "facter": { "environment" : "development" }
+      "facter": {
+        "environment" : "development",
+        "aws_access_key_id" : "{{ user `aws_access_key_id`}}",
+        "aws_secret_access_key" : "{{ user `aws_secret_access_key`}}"
+      }
     }
   ]
 }
