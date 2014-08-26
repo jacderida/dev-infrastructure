@@ -1,5 +1,5 @@
 class profile::aws_cli (
-  $user = "ec2-user"
+  $user = 'ec2-user'
 )
 {
   anchor { 'profile::aws_cli::start': } ->
@@ -27,7 +27,7 @@ class profile::aws_cli (
   } ->
 
   exec { 'chmod a+x /etc/aws.sh':
-    command => "/bin/chmod a+x /etc/profile.d/aws.sh"
+    command => '/bin/chmod a+x /etc/profile.d/aws.sh'
   } ->
 
   exec { 'set aws access key id':
