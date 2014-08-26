@@ -16,21 +16,26 @@ class profile::aws_cli (
     command => '/usr/bin/sudo /usr/bin/pip install awscli'
   } ->
 
-  file { "/home/${user}/.aws":
-    ensure => directory
+  file { '/etc/aws_config':
+    ensure => present,
+    source => 'puppet:///files/aws_config',
+    mode   => '0744'
   } ->
 
-  file { "/home/${user}/.aws/config":
-    ensure => present,
-    source => 'puppet:///files/aws_config'
+  exec { 'create /etc/aws.sh':
+    command => '/bin/echo "export AWS_CONFIG_FILE=/etc/aws_config" >> /etc/profile.d/aws.sh'
+  } ->
+
+  exec { 'chmod a+x /etc/aws.sh':
+    command => "/bin/chmod a+x /etc/profile.d/aws.sh"
   } ->
 
   exec { 'set aws access key id':
-    command => "/bin/sed -i 's#<default access key>#$::aws_access_key_id#g' /home/${user}/.aws/config"
+    command => "/bin/sed -i 's#<default access key>#${::aws_access_key_id}#g' /etc/aws_config"
   } ->
 
   exec { 'set aws secret key':
-    command => "/bin/sed -i 's#<default secret key>#$::aws_secret_access_key#g' /home/${user}/.aws/config"
+    command => "/bin/sed -i 's#<default secret key>#${::aws_secret_access_key}#g' /etc/aws_config"
   } ->
 
   anchor { 'profile::aws_cli::end': }
