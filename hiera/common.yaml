@@ -5,6 +5,17 @@ profile::database::jira_dbname: jira
 profile::database::jira_dbuser: jira
 profile::database::jira_db_encoding: UNICODE
 profile::database::port: 5432
+profile::database::cron_minute: "00"
+profile::database::cron_hour: 22
+profile::database::cron_date: *
+profile::database::cron_month: *
+profile::database::cron_weekday: *
+profile::database::cron_user: root
+profile::database::cron_backup_path: /srv/backups
+profile::database::cron_path_owner: postgres
+profile::database::cron_path_group: postgres
+profile::database::cron_path_mode: "750"
+profile::database::cron_command: /bin/bash /srv/backups/postgres_backup.sh
 
 profile::jira_server::installdir: /opt/jira
 profile::jira_server::version: 6.2.7
