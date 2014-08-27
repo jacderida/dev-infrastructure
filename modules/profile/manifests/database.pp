@@ -64,9 +64,9 @@ class profile::database {
     mode   =>  $cron_path_mode,
   } ->
 
-  file { "${cron_backup_path}/postgres_backup.sh":
+  file { "${cron_backup_path}/database_backup.sh":
     ensure => present,
-    source => 'puppet:///files/postgres_backup.sh'
+    source => 'puppet:///files/database_backup.sh'
   } ->
 
   cron::job { 'postgres_backup':
