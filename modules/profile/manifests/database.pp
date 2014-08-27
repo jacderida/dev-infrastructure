@@ -55,7 +55,7 @@ class profile::database {
     owner    => $jira_dbuser,
     encoding => $jira_db_encoding
   } ->
-  anchor { 'postgres::end': }
+  anchor { 'postgres::end': } ->
 
   file { $cron_backup_path:
     ensure => 'directory',
