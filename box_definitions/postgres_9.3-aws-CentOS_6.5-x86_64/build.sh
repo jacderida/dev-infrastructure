@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 prefix="dev_infra-"
-image_name=$(basename `pwd`)
+image_name=$(basename `pwd` | sed 's/aws-//g')
 full_image_name=$prefix$image_name
 
 function get_self_owned_aws_images()
@@ -41,6 +41,7 @@ function create_security_group()
     fi
 }
 
+echo "Building box $full_image_name"
 remove_existing_image
 create_security_group
-packer build template.json
+packer build -var 'image_name='"$full_image_name"'' template.json
