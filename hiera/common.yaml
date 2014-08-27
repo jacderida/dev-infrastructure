@@ -5,7 +5,7 @@ profile::database::jira_dbname: jira
 profile::database::jira_dbuser: jira
 profile::database::jira_db_encoding: UNICODE
 profile::database::port: 5432
-profile::database::cron_minute: "00"
+profile::database::cron_minute: "15"
 profile::database::cron_hour: 22
 profile::database::cron_date: *
 profile::database::cron_month: *
