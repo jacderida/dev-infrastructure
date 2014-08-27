@@ -2,4 +2,3 @@
 profile::database::admin_password: 'postgres'
 profile::database::dbserver: 192.168.56.103
 profile::database::jira_dbuser_password: jiradbuser
-profile::database::stash_dbuser_password: stashdbuser
