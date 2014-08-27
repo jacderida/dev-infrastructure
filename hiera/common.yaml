@@ -23,6 +23,17 @@ profile::jira_server::user: jira
 profile::jira_server::group: jira
 profile::jira_server::dbtype: postgresql
 profile::jira_server::port: 8082
+profile::jira_server::cron_minute: "00"
+profile::jira_server::cron_hour: 23
+profile::jira_server::cron_date: *
+profile::jira_server::cron_month: *
+profile::jira_server::cron_weekday: *
+profile::jira_server::cron_user: jira
+profile::jira_server::cron_backup_path: /srv/backups
+profile::jira_server::cron_path_owner: jira
+profile::jira_server::cron_path_group: jira
+profile::jira_server::cron_path_mode: "750"
+profile::jira_server::cron_command: /bin/bash /srv/backups/jira_backup.sh
 
 profile::jenkins_master::install_java: false # Jenkins does require Java. This is to stop the Jenkins module running its own Java installation.
 profile::jenkins_master::use_lts: true
