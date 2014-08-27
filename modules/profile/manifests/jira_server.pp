@@ -34,6 +34,10 @@ class profile::jira_server {
     ensure => 'directory'
   } ->
 
+  package { 'wget':
+    ensure => present
+  } ->
+
   class { 'jira':
     version    => $version,
     installdir => $installdir,
