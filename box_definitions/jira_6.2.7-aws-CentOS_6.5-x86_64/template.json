@@ -1,0 +1,67 @@
+{
+  "variables": {
+    "aws_access_key_id": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_access_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "image_name": ""
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "ami_name": "{{user `image_name`}}",
+      "instance_type": "t1.micro",
+      "region": "eu-west-1",
+      "ssh_username": "root",
+      "source_ami": "ami-42718735"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [ "sleep 30" ]
+    },
+    {
+      "scripts": [
+        "../../sh/setup_epel_repository-RHEL.sh",
+        "../../sh/install_puppet-RHEL.sh"
+      ],
+      "type": "shell"
+    },
+    {
+      "type": "shell",
+      "inline": [ "mkdir /etc/puppet/files" ]
+    },
+    {
+      "type": "file",
+      "source": "../../files/",
+      "destination": "/etc/puppet/files"
+    },
+    {
+      "type": "shell",
+      "inline": [ "cp /etc/puppet/files/fileserver.conf /etc/puppet/" ]
+    },
+    {
+      "type": "shell",
+      "inline": [ "yum update -y" ]
+    },
+    {
+      "type": "shell",
+      "inline": [ "mkdir -p /etc/puppet/hieradata" ]
+    },
+    {
+      "type": "file",
+      "source": "../../hiera/",
+      "destination": "/etc/puppet/hieradata"
+    },
+    {
+      "type": "puppet-masterless",
+      "manifest_file": "../../manifests/jira.pp",
+      "module_paths": [ "../../modules" ],
+      "hiera_config_path": "../../hiera.yaml",
+      "facter": {
+        "environment" : "development",
+        "aws_access_key_id" : "{{ user `aws_access_key_id`}}",
+        "aws_secret_access_key" : "{{ user `aws_secret_access_key`}}"
+      }
+    }
+  ]
+}
