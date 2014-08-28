@@ -21,16 +21,16 @@ function get_group_id_from_image_name()
 
 function remove_existing_image()
 {
-    image_id=$(get_self_owned_aws_images | get_image_id_for_name)
+    local image_id=$(get_self_owned_aws_images | get_image_id_for_name)
     if [[ ! -z "$image_id" ]]; then
         echo "Removing existing $full_image_name AMI"
-        aws ec2 deregister-image --image-id $full_image_name
+        aws ec2 deregister-image --image-id $image_id
     fi
 }
 
 function create_security_group()
 {
-    group_id=$(get_group_id_from_image_name)
+    local group_id=$(get_group_id_from_image_name)
     if [[ -z "$group_id" ]]; then
         echo "Adding security group $full_image_name"
         aws ec2 create-security-group --group-name $full_image_name --description "Postgres machine for development infrastructure"
