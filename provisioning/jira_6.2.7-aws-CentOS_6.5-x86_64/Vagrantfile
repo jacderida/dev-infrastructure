@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "aws"
+  config.vm.provider :aws do | aws, override |
+    aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
+    aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+    aws.ami = "ami-88974fff"
+    aws.region = "eu-west-1"
+    aws.instance_type = "m1.small"
+    aws.security_groups = [ "dev_infra-jira_6.2.7-CentOS_6.5-x86_64" ]
+    aws.tags = {  Name: "dev_infra-jira_6.2.7-CentOS_6.5-x86_64" }
+    override.ssh.username = "ec2-user"
+    override.ssh.private_key_path = "~/.ssh/jira_server_key"
+  end
+end
