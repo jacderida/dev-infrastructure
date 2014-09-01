@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 prefix="dev_infra-"
-image_name=$(basename `pwd`)
+image_name=$(basename `pwd` | sed 's/aws-//g')
 full_image_name=$prefix$image_name
 
 function get_self_owned_aws_images()
