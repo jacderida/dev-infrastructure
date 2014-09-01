@@ -15,6 +15,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.security_groups = [ "dev_infra-postgres_9.3-CentOS_6.5-x86_64" ]
     aws.tags = {  Name: "dev_infra-postgres_9.3-CentOS_6.5-x86_64" }
     override.ssh.username = "ec2-user"
-    override.ssh.private_key_path = "~/.ssh/postgres_key"
+    override.ssh.private_key_path = "~/.ssh/dev_infra_key"
   end
 end
