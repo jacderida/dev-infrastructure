@@ -1,7 +1,4 @@
-class user::ec2_user (
-  $authorized_key = undef
-)
-{
+class user::ec2_user {
   anchor { 'ec2-user::begin': } ->
   user { 'ec2-user':
     ensure     => present,
@@ -21,7 +18,7 @@ class user::ec2_user (
   ssh_authorized_key { 'ec2-user_authorized_key':
     ensure => present,
     user   => 'ec2-user',
-    key    => $authorized_key,
+    key    => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDXuecZh0RkOWUv1ZZ2gDgAclZD7xSLmtXKVSdLQ5s4CtHsWO0GDlTDnaxs1+SBtZ4iPlzy2kyEQq8nCtX9XvMwR7QnyNA5O56uu+wx5oVcAEiXznju6J3QjS3AjoqgJEXkc4Qb+RB5gE4VhNcO5WTq+t3e3Y827kKWbTnv00fM/4ZP3RSgOdaYChokdE4c4bH+GS2wVbF4oRFBMwq6PSqfpDxDJOsuwoAV0Cddn+zqIa9rseb+y+9wpPUCLbRit5e3oAnwvSIPz6ueVmJ7esBa+VGCuAlpOazRa9GODOXCfQbsgkjfgZExRjLgmNvB30zcvBY+OwYnxRVasIuemt/1',
     target => '/home/ec2-user/.ssh/authorized_keys',
     type   => 'ssh-rsa'
   } ->
