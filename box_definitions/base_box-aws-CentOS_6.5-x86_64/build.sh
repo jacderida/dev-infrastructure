@@ -24,7 +24,7 @@ function remove_existing_image()
     image_id=$(get_self_owned_aws_images | get_image_id_for_name)
     if [[ ! -z "$image_id" ]]; then
         echo "Removing existing $full_image_name AMI"
-        aws ec2 deregister-image --image-id $full_image_name
+        aws ec2 deregister-image --image-id $image_id
     fi
 }
 
@@ -43,4 +43,4 @@ function create_security_group()
 
 remove_existing_image
 create_security_group
-packer build template.json
+packer build -var 'image_name='"$full_image_name"'' template.json
