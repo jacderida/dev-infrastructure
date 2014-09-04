@@ -37,7 +37,7 @@ profile::jira_server::cron_command: /bin/bash /srv/backups/jira_backup.sh
 
 profile::jenkins_master::install_java: false # Jenkins does require Java. This is to stop the Jenkins module running its own Java installation.
 profile::jenkins_master::use_lts: true
-profile::jenkins_master::port: 8080
+profile::jenkins_master::port: 80
 profile::jenkins_master::plugins:
     ssh-credentials:
         version: 0
@@ -84,22 +84,7 @@ profile::jenkins_master::plugins:
         manage_config: false
         config_filename: undef
         config_content: undef
-    artifactory:
-        version: 0
-        manage_config: false
-        config_filename: undef
-        config_content: undef
-    jboss:
-        version: 0
-        manage_config: false
-        config_filename: undef
-        config_content: undef
     jira:
-        version: 0
-        manage_config: false
-        config_filename: undef
-        config_content: undef
-    mapdb-api:
         version: 0
         manage_config: false
         config_filename: undef
@@ -109,7 +94,12 @@ profile::jenkins_master::plugins:
         manage_config: false
         config_filename: undef
         config_content: undef
-    sonar:
+    node-iterator-api:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    ec2:
         version: 0
         manage_config: false
         config_filename: undef
