@@ -5,6 +5,7 @@ forge "https://forgeapi.puppetlabs.com"
 # use dependencies defined in Modulefile
 modulefile
 
+mod "maestrodev/rvm"
 mod "puppetlabs/firewall"
 mod "torrancew/cron"
 mod "puppetlabs/postgresql"
