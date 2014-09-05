@@ -9,6 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "../../hiera", "/etc/puppet/hieradata"
   config.vm.synced_folder "../../files", "/etc/puppet/files"
   config.vm.provision "shell", inline: "cp /etc/puppet/files/fileserver.conf /etc/puppet"
+  config.vm.provision "shell", path: "bootstrap.sh"
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "."
     puppet.manifest_file = "jenkins.pp"
