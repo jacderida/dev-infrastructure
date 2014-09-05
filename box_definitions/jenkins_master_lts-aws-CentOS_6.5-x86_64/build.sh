@@ -45,7 +45,7 @@ function create_security_group()
         sleep 5
         group_id=$(get_group_id_from_image_name)
         open_port_on_security_group 22 $group_id
-        open_port_on_security_group 80 $group_id
+        open_port_on_security_group 8080 $group_id
     fi
 }
 
