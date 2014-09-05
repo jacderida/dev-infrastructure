@@ -10,10 +10,14 @@ class profile::jenkins_master {
     action => accept
   } ->
 
+  anchor { 'profile::jenkins_master::start': } ->
+
   class { 'jenkins':
     lts          => $use_lts,
     install_java => $install_java,
     plugin_hash  => $plugins,
     config_hash  => { 'JENKINS_PORT' => { 'value' => $port } }
-  }
+  } ->
+
+  anchor { 'profile::jenkins_master::end': }
 }
