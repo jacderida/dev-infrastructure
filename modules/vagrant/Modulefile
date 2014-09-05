@@ -1,0 +1,8 @@
+name 'mjanser-vagrant'
+version '1.1.0'
+source 'git://github.com/mjanser/puppet-vagrant.git'
+author 'Martin Janser'
+license 'MIT'
+summary 'Install Vagrant'
+description 'Install Vagrant and plugins for it'
+project_page 'https://github.com/mjanser/puppet-vagrant.git'

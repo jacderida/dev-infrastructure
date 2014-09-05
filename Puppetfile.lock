@@ -4,6 +4,7 @@ FORGE
     darin-zypprepo (1.0.1)
     maestrodev-rvm (1.6.4)
       puppetlabs-stdlib (>= 3.2.0)
+    mjanser-vagrant (1.1.0)
     mkrakowitzer-deploy (0.0.2)
     puppetlabs-apt (1.5.2)
       puppetlabs-stdlib (>= 2.2.1)
@@ -41,6 +42,7 @@ GIT
 
 DEPENDENCIES
   maestrodev-rvm (>= 0)
+  mjanser-vagrant (>= 0)
   mkrakowitzer-jira (>= 0)
   puppetlabs-firewall (>= 0)
   puppetlabs-java (>= 0)

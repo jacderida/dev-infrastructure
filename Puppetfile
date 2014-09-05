@@ -6,6 +6,7 @@ forge "https://forgeapi.puppetlabs.com"
 modulefile
 
 mod "maestrodev/rvm"
+mod "mjanser/vagrant"
 mod "puppetlabs/firewall"
 mod "torrancew/cron"
 mod "puppetlabs/postgresql"

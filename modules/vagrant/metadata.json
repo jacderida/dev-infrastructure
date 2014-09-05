@@ -1,0 +1,52 @@
+{
+  "author": "Martin Janser",
+  "description": "Install Vagrant and plugins for it",
+  "license": "MIT",
+  "name": "mjanser-vagrant",
+  "project_page": "https://github.com/mjanser/puppet-vagrant.git",
+  "source": "git://github.com/mjanser/puppet-vagrant.git",
+  "summary": "Install Vagrant",
+  "version": "1.1.0",
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": "3.2.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat"
+    },
+    {
+      "operatingsystem": "Debian"
+    },
+    {
+      "operatingsystem": "Ubuntu"
+    },
+    {
+      "operatingsystem": "Darwin"
+    },
+    {
+      "operatingsystem": "Windows"
+    }
+  ],
+  "dependencies": [
+
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "LICENSE": "882fc7f770b733faf5c530b2992d5b40",
+    "Modulefile": "e917ef1b4f4d61cf74f400581be1b2df",
+    "README.md": "612330c8f00bddcc5c5612cd758c91d3",
+    "manifests/bash.pp": "adea842e113d2b781827dbc6ff3a72e4",
+    "manifests/init.pp": "566f0234da6a3ad827863cc8eeef1020",
+    "manifests/plugin.pp": "a8a3f010806efd5835b7b15e67940300",
+    "manifests/sudo.pp": "3ad02427147ccd6e749e0400f3c98627"
+  }
+}
