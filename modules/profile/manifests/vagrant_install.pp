@@ -1,5 +1,5 @@
 class profile::vagrant_install(
-  $user
+  $user = undef
 ) {
   $vagrant_path = '/opt/vagrant/bin/vagrant'
 
@@ -20,7 +20,7 @@ class profile::vagrant_install(
     version => '1.6.3'
   } ->
 
-  vagrant::plugin { 'vagrant-rackspace':
+  vagrant::plugin { 'vagrant-aws':
     user => $user
   } ->
 
