@@ -5,6 +5,10 @@ class profile::build_slave {
     ensure => present
   } ->
 
+  package { 'wget':
+    ensure => present
+  } ->
+
   file { '/tmp/git_1.7.12-RHEL.sh':
     ensure => present,
     source => 'puppet:///files/git_1.7.12-RHEL.sh'
