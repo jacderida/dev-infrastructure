@@ -1,0 +1,15 @@
+{
+  "CHANGELOG": "c7d2f145d2a9f960f0d92543bb436f0f",
+  "Gemfile": "31d67830f694c2af4c709d46c513bbc7",
+  "Gemfile.lock": "d83c91f3a3b9f4c393ff33bcd6752267",
+  "LICENSE": "3b83ef96387f14655fc854ddc3c6bd57",
+  "README.md": "54a26c6c76ed2c673fc7886c0eb14d0c",
+  "Rakefile": "7025319af4b4c88fa45c598bdfbcaf2c",
+  "manifests/download.pp": "2f107248a9be7f055668378a1577ea40",
+  "manifests/extract.pp": "c7995528470d524c57208eef4a7169a2",
+  "manifests/init.pp": "41ac8913599e75bbe70d73c254bb4b98",
+  "manifests/tar_gz.pp": "5ecefd59bf41ed9f3c324d292089b687",
+  "manifests/zip.pp": "1686163d73de3e16c7e6a79293f41fb3",
+  "metadata.json": "6b2c54da8111c95916816a1a4f25575a",
+  "spec/spec_helper.rb": "936172d42dbf9fc766e90d1188ab6356"
+}

@@ -5,6 +5,7 @@ forge "https://forgeapi.puppetlabs.com"
 # use dependencies defined in Modulefile
 modulefile
 
+mod "camptocamp/archive"
 mod "maestrodev/rvm"
 mod "mjanser/vagrant"
 mod "puppetlabs/firewall"
