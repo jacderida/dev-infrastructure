@@ -43,4 +43,4 @@ function create_security_group()
 
 remove_existing_image
 create_security_group
-packer build -var 'image_name='"$full_image_name"'' template.json
+/usr/local/bin/packer build -var 'image_name='"$full_image_name"'' template.json
