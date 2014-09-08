@@ -21,12 +21,12 @@ class profile::packer_install {
     follow_redirects => true
   } ->
 
-  exec { 'add packer to $PATH':
-    command => "/bin/echo \"export PATH=${packer_path}:\$PATH\" >> /etc/profile.d/packer.sh"
-  } ->
-
-  exec { 'chmod a+x /etc/profile.d/packer.sh':
-    command => '/bin/chmod a+x /etc/profile.d/packer.sh'
+  # This is easier than putting the application's directory on the PATH.
+  # Other scripts can then reference it from /usr/local/bin, because it
+  # turns out there's actually another packer program in /usr/sbin, which
+  # generally tends to be on the path before anything else.
+  exec { 'symlink packer to /usr/local/bin':
+    command => "ln -s ${packer_path}/packer /usr/local/bin/packer"
   } ->
 
   anchor { 'profile::packer_install::end': }
