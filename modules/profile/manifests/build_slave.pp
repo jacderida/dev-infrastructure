@@ -16,7 +16,8 @@ class profile::build_slave {
 
   exec { 'install git 1.7.12':
     command => '/usr/bin/sudo /bin/bash git_1.7.12-RHEL.sh',
-    cwd     => '/tmp'
+    cwd     => '/tmp',
+    timeout => 1800 # This can take a little while to run on slower boxes.
   } ->
 
   anchor { 'profile::build_slave::end': }

@@ -38,7 +38,8 @@ class profile::vagrant_install(
     command     => "${vagrant_path} box add aws https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box",
     cwd         => "/home/${user}",
     user        => $user,
-    environment => "HOME=/home/${user}"
+    environment => "HOME=/home/${user}",
+    timeout     => 1800 # This can take a while to run on slower boxes.
   } ->
 
   anchor { 'profile::vagrant_install::end': }
