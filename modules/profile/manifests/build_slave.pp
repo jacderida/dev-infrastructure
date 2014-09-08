@@ -20,5 +20,16 @@ class profile::build_slave {
     timeout => 1800 # This can take a little while to run on slower boxes.
   } ->
 
+  file { '/tmp/jq-1.4.sh':
+    ensure => present,
+    source => 'puppet:///files/jq-1.4.sh'
+  } ->
+
+  exec { 'install jq 1.4':
+    command => '/usr/bin/sudo /bin/bash jq-1.4.sh',
+    cwd     => '/tmp',
+    timeout => 1800 # This can take a little while to run on slower boxes.
+  } ->
+
   anchor { 'profile::build_slave::end': }
 }
