@@ -20,6 +20,11 @@ class profile::build_slave {
     timeout => 1800 # This can take a little while to run on slower boxes.
   } ->
 
+  git::resource::config { 'build_user':
+    email    => $::git_email_address,
+    realname => $::git_real_name
+  } ->
+
   file { '/tmp/jq-1.4.sh':
     ensure => present,
     source => 'puppet:///files/jq-1.4.sh'

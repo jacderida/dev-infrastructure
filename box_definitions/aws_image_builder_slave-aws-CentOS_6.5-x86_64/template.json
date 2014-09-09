@@ -2,7 +2,9 @@
   "variables": {
     "aws_access_key_id": "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_secret_access_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-    "image_name": ""
+    "image_name": "",
+    "git_email_address": "",
+    "git_real_name": ""
   },
   "builders": [
     {
@@ -60,7 +62,9 @@
       "facter": {
         "environment" : "development",
         "aws_access_key_id" : "{{ user `aws_access_key_id`}}",
-        "aws_secret_access_key" : "{{ user `aws_secret_access_key`}}"
+        "aws_secret_access_key" : "{{ user `aws_secret_access_key`}}",
+        "git_email_address" : "{{ user `git_email_address`}}",
+        "git_real_name" : "{{ user `git_real_name`}}"
       }
     }
   ]

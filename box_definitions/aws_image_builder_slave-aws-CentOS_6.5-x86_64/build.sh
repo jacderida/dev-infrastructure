@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+git_email_address=$1
+git_real_name=$2
 prefix="dev_infra-"
 image_name=$(basename `pwd` | sed 's/aws-//g')
 full_image_name=$prefix$image_name
@@ -51,4 +53,4 @@ function create_security_group()
 echo "Building box $full_image_name"
 remove_existing_image
 create_security_group
-packer build -var 'image_name='"$full_image_name"'' template.json
+packer build -var 'image_name='"$full_image_name"'' -var 'git_email_address='"$git_email_address"'' -var 'git_real_name='"$git_real_name"'' template.json
