@@ -53,4 +53,4 @@ function create_security_group()
 echo "Building box $full_image_name"
 remove_existing_image
 create_security_group
-packer build -var 'image_name='"$full_image_name"'' -var 'git_email_address='"$git_email_address"'' -var 'git_real_name='"$git_real_name"'' template.json
+/usr/bin/local/packer build -var 'image_name='"$full_image_name"'' -var 'git_email_address='"$git_email_address"'' -var 'git_real_name='"$git_real_name"'' template.json

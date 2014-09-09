@@ -48,7 +48,7 @@ function create_security_group()
 
 function build_image()
 {
-    packer build -var 'image_name='"$full_image_name"'' template.json
+    /usr/bin/local/packer build -var 'image_name='"$full_image_name"'' template.json
 }
 
 function replace_vagrant_image_id()
