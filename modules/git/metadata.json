@@ -1,0 +1,14 @@
+{
+  "name": "maestrodev-git",
+  "version": "1.0.6",
+  "author": "maestrodev",
+  "summary": "MaestroDev Git",
+  "license": "Apache License, Version 2.0",
+  "source": "http://github.com/maestrodev/puppet-git",
+  "project_page": "http://github.com/maestrodev/puppet-git",
+  "issues_url": "https://github.com/maestrodev/puppet-git/issues",
+  "description": "Install and configure Git client",
+  "dependencies": [
+  
+  ]
+}

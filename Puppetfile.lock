@@ -3,6 +3,7 @@ FORGE
   specs:
     camptocamp-archive (0.1.1)
     darin-zypprepo (1.0.1)
+    maestrodev-git (1.0.6)
     maestrodev-rvm (1.6.4)
       puppetlabs-stdlib (>= 3.2.0)
     mjanser-vagrant (1.1.0)
@@ -43,6 +44,7 @@ GIT
 
 DEPENDENCIES
   camptocamp-archive (>= 0)
+  maestrodev-git (>= 0)
   maestrodev-rvm (>= 0)
   mjanser-vagrant (>= 0)
   mkrakowitzer-jira (>= 0)

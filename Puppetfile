@@ -7,6 +7,7 @@ modulefile
 
 mod "camptocamp/archive"
 mod "maestrodev/rvm"
+mod "maestrodev/git"
 mod "mjanser/vagrant"
 mod "puppetlabs/firewall"
 mod "torrancew/cron"

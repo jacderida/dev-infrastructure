@@ -1,0 +1,13 @@
+{
+  "Gemfile": "a260b33e96476469329eebabaf631f08",
+  "Gemfile.lock": "adb9e9ab1070f9a9a8d1df2623c5d1bb",
+  "LICENSE": "1c27e7509536dde10c12b66f290cc8f3",
+  "Modulefile": "3c17718ffd4db430e2a4819ea8e0f6a8",
+  "README.md": "5732b6673dc11aca7b67c82b4e868537",
+  "Rakefile": "891fbbcbbc98dd6e44ec5ec6bc9746dd",
+  "manifests/init.pp": "92ee6d9aab9b408bbdc191424a4ca1bf",
+  "manifests/resource/config.pp": "a19964f3e49d54e5f60edad204703c14",
+  "spec/classes/git_spec.rb": "74025a2057a155ba615e4f8f47abae97",
+  "spec/spec_helper.rb": "12bcab41088eb048322292d48c7f49f8",
+  "templates/gitconfig.erb": "466ec891ec4fe0ff9f8fac7e05294d71"
+}
