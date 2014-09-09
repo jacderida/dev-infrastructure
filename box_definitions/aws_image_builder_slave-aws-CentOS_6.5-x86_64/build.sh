@@ -16,6 +16,11 @@ function get_image_id_for_name()
     jq --raw-output --arg image_name $full_image_name '.Images | map(select(.Name == $image_name)) | .[]["ImageId"]'
 }
 
+function get_image_id_for_name_from_my_amis()
+{
+    get_self_owned_aws_images | get_image_id_for_name
+}
+
 function get_group_id_from_image_name()
 {
     aws ec2 describe-security-groups | jq --raw-output --arg image_name $full_image_name '.SecurityGroups | map(select(.GroupName == $image_name)) | .[]["GroupId"]'
@@ -50,7 +55,21 @@ function create_security_group()
     fi
 }
 
+function build_image()
+{
+    /usr/local/bin/packer build -var 'image_name='"$full_image_name"'' -var 'git_email_address='"$git_email_address"'' -var 'git_real_name='"$git_real_name"'' template.json
+}
+
+function replace_vagrant_image_id()
+{
+    sleep 5 # Sometimes AWS may need some time to catch up.
+    local image_id=$(get_image_id_for_name_from_my_amis)
+    echo "Updating Vagrantfile with new image ID $image_id"
+    sed -i "s/aws.ami = \".*\"/aws.ami = \"$image_id\"/g" ../../provisioning/aws_image_builder_build_slave-aws-CentOS_6.5-x86_64/Vagrantfile
+}
+
 echo "Building box $full_image_name"
 remove_existing_image
 create_security_group
-/usr/bin/local/packer build -var 'image_name='"$full_image_name"'' -var 'git_email_address='"$git_email_address"'' -var 'git_real_name='"$git_real_name"'' template.json
+build_image
+replace_vagrant_image_id
