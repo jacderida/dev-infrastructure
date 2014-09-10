@@ -13,7 +13,7 @@
       "ssh_username": "root",
       "source_ami": "ami-42718735",
       "ami_block_device_mappings": [{
-        "device_name": "/dev/sda1",
+        "device_name": "/dev/sda",
         "volume_size": 8,
         "delete_on_termination": true
       }]
