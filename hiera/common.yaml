@@ -114,3 +114,13 @@ profile::jenkins_master::plugins:
         manage_config: false
         config_filename: undef
         config_content: undef
+    jquery:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    simple-theme-plugin:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef

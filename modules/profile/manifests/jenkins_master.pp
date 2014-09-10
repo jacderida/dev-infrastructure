@@ -19,5 +19,24 @@ class profile::jenkins_master {
     config_hash  => { 'JENKINS_PORT' => { 'value' => $port } }
   } ->
 
+  # This is a temporary measure to allow the userContent directory time to be created.
+  # There is a way to wait on services starting. It's based on looking for output in the
+  # log, but I need to come back to it later.
+  exec { 'sleeping for 90 seconds':
+    command => '/bin/sleep 90'
+  } ->
+
+  file { '/var/lib/jenkins/userContent/doony.min.js':
+    ensure => present,
+    owner  => 'jenkins',
+    source => 'puppet:///files/doony.min.js'
+  } ->
+
+  file { '/var/lib/jenkins/userContent/doony.min.css':
+    ensure => present,
+    owner  => 'jenkins',
+    source => 'puppet:///files/doony.min.css'
+  } ->
+
   anchor { 'profile::jenkins_master::end': }
 }
