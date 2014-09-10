@@ -124,3 +124,8 @@ profile::jenkins_master::plugins:
         manage_config: false
         config_filename: undef
         config_content: undef
+    copy-to-slave:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
