@@ -21,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :aws do | aws, override |
     aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
     aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
-    aws.ami = "ami-76bb1e01"
+    aws.ami = ""
     aws.region = "eu-west-1"
     aws.instance_type = "t1.micro"
     aws.security_groups = [ "dev_infra-base_box-CentOS_6.5-x86_64" ]
