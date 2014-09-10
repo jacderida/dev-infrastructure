@@ -104,3 +104,13 @@ profile::jenkins_master::plugins:
         manage_config: false
         config_filename: undef
         config_content: undef
+    timestamper:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
+    ansicolor:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
