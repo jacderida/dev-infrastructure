@@ -57,6 +57,8 @@ function replace_vagrant_image_id()
     local image_id=$(get_image_id_for_name_from_my_amis)
     echo "Updating Vagrantfile with new image ID $image_id"
     sed -i "s/aws.ami = \".*\"/aws.ami = \"$image_id\"/g" ../../provisioning/base_box-aws-CentOS_6.5-x86_64/Vagrantfile
+    sed -i "s/aws.ami = \".*\"/aws.ami = \"$image_id\"/g" ../../provisioning/jenkins_master_lts_install-aws-CentOS_6.5-x86_64/Vagrantfile
+    sed -i "s/aws.ami = \".*\"/aws.ami = \"$image_id\"/g" ../../provisioning/jira_install_6.2.7-aws-CentOS_6.5-x86_64/Vagrantfile
 }
 
 remove_existing_image
