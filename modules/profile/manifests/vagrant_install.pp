@@ -5,6 +5,14 @@ class profile::vagrant_install(
 
   anchor { 'profile::vagrant_install::begin': } ->
 
+  # Dependencies for nokogiri.
+  package { 'gcc': ensure => present } ->
+  package { 'ruby-devel': ensure => present } ->
+  package { 'libxml2': ensure => present } ->
+  package { 'libxml2-devel': ensure => present } ->
+  package { 'libxslt': ensure => present } ->
+  package { 'libxslt-devel': ensure => present } ->
+
   class { 'rvm': } ->
 
   rvm::system_user { $user: ; } ->
