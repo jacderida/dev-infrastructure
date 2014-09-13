@@ -3,6 +3,7 @@ class profile::jenkins_master {
   $use_lts = hiera('profile::jenkins_master::use_lts')
   $port = hiera('profile::jenkins_master::port')
   $plugins = hiera('profile::jenkins_master::plugins')
+  $jenkins_home_path = hiera('profile::jenkins_master::jenkins_home_path')
 
   $cron_command = hiera('profile::jenkins_master::cron_command')
   $cron_minute = hiera('profile::jenkins_master::cron_minute')
@@ -60,13 +61,13 @@ class profile::jenkins_master {
     command => '/bin/sleep 90'
   } ->
 
-  file { '/var/lib/jenkins/userContent/doony.min.js':
+  file { "${jenkins_home_path}/userContent/doony.min.js":
     ensure => present,
     owner  => 'jenkins',
     source => 'puppet:///files/doony.min.js'
   } ->
 
-  file { '/var/lib/jenkins/userContent/doony.min.css':
+  file { "${jenkins_home_path}/userContent/doony.min.css":
     ensure => present,
     owner  => 'jenkins',
     source => 'puppet:///files/doony.min.css'
