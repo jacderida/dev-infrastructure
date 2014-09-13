@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+backups_path="<%= scope.function_hiera(['profile::jenkins_master::cron_backup_path']) %>"
+backup_file="jenkins_home_$(date +%d%m%y%k%M%S).tar"
+full_backup_path="$backups_path/$backup_file"
+jenkins_home_path="<%= scope.function_hiera(['profile::jenkins_master::jenkins_home_path']) %>"
+tar -cvf $full_backup_path $jenkins_home_path
+aws s3 cp $full_backup_path s3://jacderida-jenkins-backups/$backup_file

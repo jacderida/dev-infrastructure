@@ -36,8 +36,20 @@ profile::jira_server::cron_path_mode: "750"
 profile::jira_server::cron_command: /bin/bash /srv/backups/jira_backup.sh
 
 profile::jenkins_master::install_java: false # Jenkins does require Java. This is to stop the Jenkins module running its own Java installation.
+profile::jenkins_master::jenkins_home_path: /var/lib/jenkins
 profile::jenkins_master::use_lts: true
 profile::jenkins_master::port: 8080
+profile::jenkins_master::cron_minute: "00"
+profile::jenkins_master::cron_hour: 23
+profile::jenkins_master::cron_date: *
+profile::jenkins_master::cron_month: *
+profile::jenkins_master::cron_weekday: *
+profile::jenkins_master::cron_user: jenkins
+profile::jenkins_master::cron_backup_path: /srv/backups
+profile::jenkins_master::cron_path_owner: jenkins
+profile::jenkins_master::cron_path_group: jenkins
+profile::jenkins_master::cron_path_mode: "750"
+profile::jenkins_master::cron_command: /bin/bash /srv/backups/backup_jenkins.sh
 profile::jenkins_master::plugins:
     ssh-credentials:
         version: 0

@@ -14,7 +14,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.manifest_file = "jenkins.pp"
     puppet.module_path = "../../modules"
     puppet.hiera_config_path = "hiera.yaml"
-    puppet.facter = { "environment" => "development" }
+    puppet.facter =
+      {
+        "environment" => "development",
+        "aws_access_key_id" => ENV['AWS_ACCESS_KEY_ID'],
+        "aws_secret_access_key" => ENV['AWS_SECRET_ACCESS_KEY']
+      }
     puppet.options = "--verbose --debug"
   end
   config.vm.provision "shell", path: "bootstrap.sh"
