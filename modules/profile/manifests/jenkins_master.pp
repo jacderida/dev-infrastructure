@@ -32,6 +32,12 @@ class profile::jenkins_master {
     config_hash  => { 'JENKINS_PORT' => { 'value' => $port } }
   } ->
 
+  file { '/tmp/wait_for_jenkins_service.sh':
+    ensure => present,
+    owner  => 'jenkins',
+    source => 'puppet:///files/wait_for_jenkins_service.sh'
+  } ->
+
   file { $cron_backup_path:
     ensure => 'directory',
     owner  =>  $cron_path_owner,
@@ -40,7 +46,7 @@ class profile::jenkins_master {
   } ->
 
   file { "${cron_backup_path}/jenkins_backup.sh":
-    ensure => present,
+    ensure  => present,
     content => template('profile/jenkins_backup.sh.erb')
   } ->
 
@@ -54,11 +60,10 @@ class profile::jenkins_master {
     command => $cron_command
   } ->
 
-  # This is a temporary measure to allow the userContent directory time to be created.
-  # There is a way to wait on services starting. It's based on looking for output in the
-  # log, but I need to come back to it later.
-  exec { 'sleeping for 90 seconds':
-    command => '/bin/sleep 90'
+  exec { 'wait for jenkins service to initialise':
+    command => '/bin/bash /tmp/wait_for_jenkins_service.sh',
+    cwd     => '/tmp',
+    user    => 'jenkins'
   } ->
 
   file { "${jenkins_home_path}/userContent/doony.min.js":
