@@ -85,9 +85,10 @@ class profile::restored_jenkins_master {
   } ->
 
   exec { 'restore jenkins home':
-    command => '/bin/bash /tmp/restore_latest_jenkins_home.sh',
-    cwd     => '/tmp',
-    user    => 'ec2-user'
+    command     => '/bin/bash /tmp/restore_latest_jenkins_home.sh',
+    cwd         => '/tmp',
+    user        => 'ec2-user',
+    environment => ['AWS_CONFIG_FILE=/etc/aws_config']
   } ->
 
   anchor { 'profile::jenkins_master::end': }
