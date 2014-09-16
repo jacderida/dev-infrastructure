@@ -2,7 +2,6 @@ class profile::restored_jenkins_master {
   $install_java = hiera('profile::jenkins_master::install_java')
   $use_lts = hiera('profile::jenkins_master::use_lts')
   $port = hiera('profile::jenkins_master::port')
-  $plugins = hiera('profile::jenkins_master::plugins')
   $jenkins_home_path = hiera('profile::jenkins_master::jenkins_home_path')
 
   $cron_command = hiera('profile::jenkins_master::cron_command')
@@ -28,7 +27,6 @@ class profile::restored_jenkins_master {
   class { 'jenkins':
     lts          => $use_lts,
     install_java => $install_java,
-    plugin_hash  => $plugins,
     config_hash  => { 'JENKINS_PORT' => { 'value' => $port } }
   } ->
 
@@ -89,6 +87,12 @@ class profile::restored_jenkins_master {
     cwd         => '/tmp',
     user        => 'ec2-user',
     environment => ['AWS_CONFIG_FILE=/etc/aws_config']
+  } ->
+
+  exec { 'wait for jenkins service to initialise after restore':
+    command => '/bin/bash /tmp/wait_for_jenkins_service.sh',
+    cwd     => '/tmp',
+    user    => 'jenkins'
   } ->
 
   anchor { 'profile::jenkins_master::end': }
