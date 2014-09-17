@@ -13,7 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.region = "eu-west-1"
     aws.instance_type = "t1.micro"
     aws.security_groups = [ "dev_infra-jenkins_master_lts-CentOS_6.5-x86_64" ]
-    aws.tags = {  Name: "jenkins_master_lts-CentOS_6.5-x86_64" }
+    aws.tags = {  Name: "dev_infra-jenkins_master_lts-CentOS_6.5-x86_64" }
     override.ssh.username = "ec2-user"
     override.ssh.private_key_path = "~/.ssh/dev_infra_key"
   end
