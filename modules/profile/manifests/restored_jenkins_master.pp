@@ -82,6 +82,12 @@ class profile::restored_jenkins_master {
     source => 'puppet:///files/doony.min.css'
   } ->
 
+  file { "${jenkins_home_path}/userContent/get_host.py":
+    ensure => present,
+    owner  => 'jenkins',
+    source => 'puppet:///files/get_host.py'
+  } ->
+
   exec { 'restore jenkins home':
     command     => '/bin/bash /tmp/restore_latest_jenkins_home.sh',
     cwd         => '/tmp',
