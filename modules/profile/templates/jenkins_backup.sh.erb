@@ -1,11 +1,39 @@
 #!/usr/bin/env bash
 
-backups_path="<%= scope.function_hiera(['profile::jenkins_master::cron_backup_path']) %>"
-archive_date=$(date +%d%m%y%k%M%S)
-backup_file="jenkins_home_$archive_date.tar"
-full_backup_path="$backups_path/$backup_file"
-jenkins_home_path="<%= scope.function_hiera(['profile::jenkins_master::jenkins_home_path']) %>"
+if [[ -z "$1" ]]; then
+    echo "The current jenkins url must be supplied for this script"
+    exit 1
+fi
 
-cd $jenkins_home_path
-tar -cvf $full_backup_path .
-aws s3 cp $full_backup_path s3://jacderida-jenkins-backups/$backup_file
+current_jenkins_url=$1
+temp_backup_path="/tmp/jenkins_backup"
+
+function copy_jenkins_home_to_temp_backup_path()
+{
+    local jenkins_home_path="<%= scope.function_hiera(['profile::jenkins_master::jenkins_home_path']) %>"
+    [[ -d "$temp_backup_path" ]] && rm -rf $temp_backup_path
+    mkdir $temp_backup_path
+    cp -r $jenkins_home_path $temp_backup_path
+}
+
+function replace_current_jenkins_url_with_placeholder()
+{
+    local escaped_jenkins_url=$(sed 's/[\.]/\\./g' <<< $current_jenkins_url)
+    cd $temp_backup_path
+    grep -r "$current_jenkins_url" . | cut -d ':' -f 1 | uniq | xargs sed -i "s/$current_jenkins_url/REPLACE_JENKINS_URL/g"
+}
+
+function backup_jenkins_home()
+{
+    local archive_date=$(date +%d%m%y%k%M%S)
+    local backup_file="jenkins_home_$archive_date.tar"
+    local backups_path="<%= scope.function_hiera(['profile::jenkins_master::cron_backup_path']) %>"
+    local full_backup_path="$backups_path/$backup_file"
+    cd $temp_backup_path
+    tar -cvf $full_backup_path .
+    aws s3 cp $full_backup_path s3://jacderida-jenkins-backups/$backup_file
+}
+
+copy_jenkins_home_to_temp_backup_path
+replace_current_jenkins_url_with_placeholder
+backup_jenkins_home
