@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
-jenkins_home_path="/var/lib/jenkins"
+new_host_name=$1
+escaped_new_host_name=$(sed 's/[\.]/\\./g' <<< $new_host_name)
+jenkins_home_path="<%= scope.function_hiera(['profile::jenkins_master::jenkins_home_path']) %>"
 latest_backup_file=$(aws s3 ls s3://jacderida-jenkins-backups | sort | tail -n 1 | cut -d ' ' -f 5)
 
 sudo service jenkins stop
 sleep 10
 aws s3 cp s3://jacderida-jenkins-backups/$latest_backup_file "/tmp/$latest_backup_file"
 sudo su -l -s /bin/bash -c "rm -r ./* && tar xvf /tmp/$latest_backup_file -C $jenkins_home_path" jenkins
+sudo su -l -s /bin/bash -c "grep -r \"$current_jenkins_url\" . | cut -d ':' -f 1 | uniq | xargs sed -i \"s/REPLACE_JENKINS_URL/$escaped_new_host_name/g\"" jenkins
 sudo service jenkins start

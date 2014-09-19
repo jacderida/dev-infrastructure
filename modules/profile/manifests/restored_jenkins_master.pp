@@ -39,7 +39,7 @@ class profile::restored_jenkins_master {
   file { '/tmp/restore_latest_jenkins_home.sh':
     ensure => present,
     owner  => 'jenkins',
-    source => 'puppet:///files/restore_latest_jenkins_home.sh'
+    content => template('profile/restore_latest_jenkins_home.sh.erb')
   } ->
 
   file { $cron_backup_path:
@@ -89,7 +89,7 @@ class profile::restored_jenkins_master {
   } ->
 
   exec { 'restore jenkins home':
-    command     => '/bin/bash /tmp/restore_latest_jenkins_home.sh',
+    command     => "/bin/bash /tmp/restore_latest_jenkins_home.sh ${::ec2_public_hostname}",
     cwd         => '/tmp',
     user        => 'ec2-user',
     environment => ['AWS_CONFIG_FILE=/etc/aws_config']
