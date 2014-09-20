@@ -33,16 +33,23 @@ function remove_existing_image()
     fi
 }
 
+function open_port_on_security_group()
+{
+    local port=$1
+    local group_id=$2
+    echo "Authorizing port $port on $group_id"
+    aws ec2 authorize-security-group-ingress --group-id $group_id --protocol tcp --port $port --cidr 0.0.0.0/0
+}
+
 function create_security_group()
 {
     local group_id=$(get_group_id_from_image_name)
     if [[ -z "$group_id" ]]; then
         echo "Adding security group $full_image_name"
-        aws ec2 create-security-group --group-name $full_image_name --description "Postgres machine for development infrastructure"
+        aws ec2 create-security-group --group-name $full_image_name --description "AWS image builder slave for development infrastructure"
         sleep 5
-        echo "Authorizing port 22 on $full_image_name"
         group_id=$(get_group_id_from_image_name)
-        aws ec2 authorize-security-group-ingress --group-id $group_id --protocol tcp --port 22 --cidr 0.0.0.0/0
+        open_port_on_security_group 22 $group_id
     fi
 }
 
@@ -61,6 +68,7 @@ function replace_vagrant_image_id()
     sed -i "s/aws.ami = \".*\"/aws.ami = \"$image_id\"/g" ../../provisioning/jira_install_6.2.7-aws-CentOS_6.5-x86_64/Vagrantfile
 }
 
+echo "Building box $full_image_name"
 remove_existing_image
 create_security_group
 build_image
