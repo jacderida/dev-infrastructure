@@ -1,4 +1,4 @@
 ---
 profile::database::admin_password: 'postgres'
-profile::database::dbserver: ec2-54-73-226-161.eu-west-1.compute.amazonaws.com
+profile::database::dbserver: db_server_placeholder
 profile::database::jira_dbuser_password: jiradbuser
