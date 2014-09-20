@@ -27,9 +27,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
     aws.ami = "ami-e6ba1f91"
     aws.region = "eu-west-1"
-    aws.instance_type = "m1.small"
+    aws.instance_type = "m1.medium"
     aws.security_groups = [ "dev_infra-base_box-CentOS_6.5-x86_64" ]
-    aws.tags = {  Name: "jira_install_6.2.7-CentOS_6.5-x86_64" }
+    aws.tags = {  Name: "dev_infra-jira_install_6.2.7-CentOS_6.5-x86_64" }
     override.ssh.username = "ec2-user"
     override.ssh.private_key_path = "~/.ssh/dev_infra_key"
   end
