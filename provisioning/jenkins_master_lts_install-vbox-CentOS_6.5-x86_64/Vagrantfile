@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box_url = "https://jacderida-vagrant-boxes.s3.amazonaws.com/base_server-CentOS-6.5-x86_64.box"
+  config.vm.box = "base_server-CentOS-6.5-x86_64.box"
+  config.vm.network "forwarded_port", guest: 8080, host: 8081
+  config.vm.network :private_network, ip: "192.168.56.104"
+  config.vm.synced_folder "../../hiera", "/etc/puppet/hieradata"
+  config.vm.synced_folder "../../files", "/etc/puppet/files"
+  config.vm.provision "shell", inline: "cp /etc/puppet/files/fileserver.conf /etc/puppet"
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "."
+    puppet.manifest_file = "jenkins.pp"
+    puppet.module_path = "../../modules"
+    puppet.hiera_config_path = "hiera.yaml"
+    puppet.facter = { "environment" => "development" }
+  end
+  config.vm.provision "shell", path: "bootstrap.sh"
+end
