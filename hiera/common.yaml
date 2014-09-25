@@ -141,3 +141,8 @@ profile::jenkins_master::plugins:
         manage_config: false
         config_filename: undef
         config_content: undef
+    ws-cleanup:
+        version: 0
+        manage_config: false
+        config_filename: undef
+        config_content: undef
