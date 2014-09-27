@@ -30,6 +30,8 @@ class profile::jira_server {
     action => accept
   } ->
 
+  anchor { 'profile::jira_server::begin': } ->
+
   file { $installdir:
     ensure => 'directory'
   } ->
@@ -85,5 +87,7 @@ class profile::jira_server {
     command => '/bin/bash /tmp/wait_for_jira_service.sh',
     cwd     => '/tmp',
     user    => 'jira'
-  }
+  } ->
+
+  anchor { 'profile::jira_server::end': }
 }
