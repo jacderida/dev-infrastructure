@@ -22,7 +22,7 @@ profile::jira_server::version: 6.2.7
 profile::jira_server::user: jira
 profile::jira_server::group: jira
 profile::jira_server::dbtype: postgresql
-profile::jira_server::port: 8082
+profile::jira_server::port: 8080
 profile::jira_server::cron_minute: "00"
 profile::jira_server::cron_hour: 23
 profile::jira_server::cron_date: *

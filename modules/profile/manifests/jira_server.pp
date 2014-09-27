@@ -53,6 +53,12 @@ class profile::jira_server {
     tomcatPort => $port
   } ->
 
+  file { '/tmp/wait_for_jira_service.sh':
+    ensure => present,
+    owner  => 'jira',
+    source => 'puppet:///files/wait_for_jira_service.sh'
+  } ->
+
   file { $cron_backup_path:
     ensure => 'directory',
     owner  =>  $cron_path_owner,
@@ -73,5 +79,11 @@ class profile::jira_server {
     weekday => $cron_weekday,
     user    => $cron_user,
     command => $cron_command
+  } ->
+
+  exec { 'wait for JIRA service to initialise':
+    command => '/bin/bash /tmp/wait_for_jira_service.sh',
+    cwd     => '/tmp',
+    user    => 'jira'
   }
 }
