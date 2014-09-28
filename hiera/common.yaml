@@ -10,7 +10,7 @@ profile::database::cron_hour: 23
 profile::database::cron_date: *
 profile::database::cron_month: *
 profile::database::cron_weekday: *
-profile::database::cron_user: root
+profile::database::cron_user: postgres
 profile::database::cron_backup_path: /srv/backups
 profile::database::cron_path_owner: postgres
 profile::database::cron_path_group: postgres
