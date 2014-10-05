@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+new_host_name=$1
+escaped_new_host_name=$(sed 's/[\.]/\\./g' <<< $new_host_name)
+postgres_url="jdbc:postgresql://$escaped_new_host_name:5432/jira"
+jira_home_path="/home/jira"
+latest_backup_file=$(aws s3 ls s3://jacderida-jira-backups | sort | tail -n 1 | cut -d ' ' -f 5)
+
+sleep 10
+aws s3 cp s3://jacderida-jira-backups/$latest_backup_file "/tmp/$latest_backup_file"
+sudo su -l -s /bin/bash -c "rm -r ./* && tar xvf /tmp/$latest_backup_file -C $jira_home_path" jira
+sudo su -l -s /bin/bash -c "sed -i \"s/REPLACE_JIRA_URL/$postgres_url/g\" dbconfig.xml" jira
