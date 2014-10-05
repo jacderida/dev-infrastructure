@@ -64,9 +64,9 @@ class profile::restored_jira_server {
 
   exec { 'restore jira home':
     command     => "/bin/bash /tmp/restore_latest_jira_home.sh ${dbserver}",
-    cwd         => '/tmp',
     user        => 'jira',
-    environment => ['AWS_CONFIG_FILE=/etc/aws_config']
+    cwd         => "/home/${user}",
+    environment => ['AWS_CONFIG_FILE=/etc/aws_config', "HOME=/home/${user}"]
   } ->
 
   exec { 'start jira after restoring home':
