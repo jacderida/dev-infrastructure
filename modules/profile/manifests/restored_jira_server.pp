@@ -40,12 +40,6 @@ class profile::restored_jira_server {
     ensure => present
   } ->
 
-  file { '/tmp/restore_latest_jira_home.sh':
-    ensure  => present,
-    owner   => 'jira',
-    content => template('profile/restore_latest_jira_home.sh.erb')
-  } ->
-
   class { 'jira':
     version        => $version,
     installdir     => $installdir,
@@ -60,6 +54,12 @@ class profile::restored_jira_server {
     javahome       => $javahome,
     tomcatPort     => $port,
     service_ensure => stopped
+  } ->
+
+  file { '/tmp/restore_latest_jira_home.sh':
+    ensure  => present,
+    owner   => 'jira',
+    content => template('profile/restore_latest_jira_home.sh.erb')
   } ->
 
   exec { 'restore jira home':
