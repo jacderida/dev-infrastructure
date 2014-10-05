@@ -69,7 +69,8 @@ class profile::restored_jira_server {
     environment => ['AWS_CONFIG_FILE=/etc/aws_config']
   } ->
 
-  service { 'jira':
+  service { 'start jira after restoring home':
+    name   => 'jira',
     ensure => running
   } ->
 
