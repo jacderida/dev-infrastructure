@@ -69,9 +69,9 @@ class profile::restored_jira_server {
     environment => ['AWS_CONFIG_FILE=/etc/aws_config']
   } ->
 
-  service { 'start jira after restoring home':
-    name   => 'jira',
-    ensure => running
+  exec { 'start jira after restoring home':
+    command     => '/sbin/service jira start',
+    user        => 'ec2-user'
   } ->
 
   file { '/tmp/wait_for_jira_service.sh':
