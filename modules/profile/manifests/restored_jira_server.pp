@@ -102,11 +102,5 @@ class profile::restored_jira_server {
     command => $cron_command
   } ->
 
-  exec { 'wait for JIRA service to initialise':
-    command => '/bin/bash /tmp/wait_for_jira_service.sh',
-    cwd     => '/tmp',
-    user    => 'jira'
-  } ->
-
   anchor { 'profile::jira_server::end': }
 }
