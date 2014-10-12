@@ -70,7 +70,7 @@ class profile::restored_jira_server {
   } ->
 
   exec { 'start jira after restoring home':
-    command     => '/sbin/service jira start',
+    command     => '/usr/bin/sudo /sbin/service jira start',
   } ->
 
   file { '/tmp/wait_for_jira_service.sh':
