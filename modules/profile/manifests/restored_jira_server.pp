@@ -69,15 +69,15 @@ class profile::restored_jira_server {
     environment => ['AWS_CONFIG_FILE=/etc/aws_config', "HOME=/home/${user}"]
   } ->
 
-  exec { 'start jira after restoring home':
-    command     => '/usr/bin/sudo /sbin/service jira start',
-  } ->
+  #exec { 'start jira after restoring home':
+    #command     => '/usr/bin/sudo /sbin/service jira start',
+  #} ->
 
-  file { '/tmp/wait_for_jira_service.sh':
-    ensure => present,
-    owner  => 'jira',
-    source => 'puppet:///files/wait_for_jira_service.sh'
-  } ->
+  #file { '/tmp/wait_for_jira_service.sh':
+    #ensure => present,
+    #owner  => 'jira',
+    #source => 'puppet:///files/wait_for_jira_service.sh'
+  #} ->
 
   file { $cron_backup_path:
     ensure => 'directory',
