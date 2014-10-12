@@ -87,8 +87,9 @@ class profile::restored_jira_server {
   } ->
 
   file { "${cron_backup_path}/jira_backup.sh":
-    ensure => present,
-    source => 'puppet:///files/jira_backup.sh'
+    ensure  => present,
+    owner   => 'jira',
+    content => template('profile/jira_backup.sh.erb')
   } ->
 
   cron::job { 'jira_backup':
