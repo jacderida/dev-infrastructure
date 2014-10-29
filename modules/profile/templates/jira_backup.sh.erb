@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+temp_backup_path="/tmp/jira_backup"
+
+function copy_jira_home_to_temp_backup_path()
+{
+    local jira_home_path="/home/jira"
+    [[ -d "$temp_backup_path" ]] && rm -rf $temp_backup_path
+    mkdir $temp_backup_path
+    cp -r $jira_home_path $temp_backup_path
+}
+
+function replace_current_jira_url_with_placeholder()
+{
+    cd $temp_backup_path/jira
+    find . -type l -exec sh -c "file -b {} | grep -q ^broken" \; -print | xargs rm -f # Remove bad symlinks.
+    sed -i "s|\(<url>\)[^<>]*\(</url>\)|\1REPLACE_JIRA_URL\2|g" dbconfig.xml
+}
+
+function backup_jira_home()
+{
+    local archive_date=$(date +%d%m%y%k%M%S)
+    local backup_file="jira_home_$archive_date.tar"
+    local backups_path="<%= scope.function_hiera(['profile::jira_server::cron_backup_path']) %>"
+    local full_backup_path="$backups_path/$backup_file"
+    cd $temp_backup_path/jira
+    tar -cvf $full_backup_path .
+    aws s3 cp $full_backup_path s3://jacderida-jira-backups/$backup_file
+}
+
+copy_jira_home_to_temp_backup_path
+replace_current_jira_url_with_placeholder
+backup_jira_home
